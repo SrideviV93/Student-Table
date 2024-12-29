@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details</title>
+</head>
+
+<body>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url("./img/bg\ image.jpg");
+            background-size: cover;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            color: white;
+        }
+
+        .container {
+            padding-top: 120px;
+            padding-left: 525px;
+        }
+
+        .form {
+            display: flex;
+            justify-content: center;
+        }
+
+        .data {
+            text-align: center;
+            font-weight: bold;
+        }
+
+
+        .row {
+            height: 30px;
+        }
+
+        .name,
+        .age,
+        .course,
+        .mail,
+        .gender {
+            padding: 10px;
+        }
+
+        .save {
+            padding: 10px;
+        }
+        .table {
+            border-radius: 10px;
+        }
+
+        .container2 {
+            width: 50%;
+            margin: 40px 0px 0px 300px;
+            padding: 10px;
+            border-radius: 20px;
+        }
+
+        .delete {
+            background-color: red;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select {
+            outline: none;
+            border: none;
+            background-color: transparent;
+        }
+
+        @media screen and (max-width:900px) {
+
+            .container {
+                margin-left: 250px;
+
+            }
+
+            .container2 {
+                margin-left: 180px;
+            }
+        }
+
+        @media screen and (max-width:600px) {
+            .container {
+                margin-left: 130px;
+
+            }
+
+            .container2 {
+                margin-left: 95px;
+            }
+        }
+    </style>
+    <div class="container">
+        <h2 class="heading" style="padding-left: 50px;">Student Form</h2>
+        <form>
+            <table class="table" border="1">
+                <tr class="row">
+                    <td class="data" style="padding: 10px;">Name</td>
+                    <td><input id="inputName" type="text" style="background-color: transparent; color: white;"></td>
+                </tr>
+                <tr class="row">
+                    <td class="data" style="padding: 10px;">Age</td>
+                    <td><input id="inputAge" type="number" style="background-color: transparent; color: white;"></td>
+                </tr>
+                <tr class="row">
+                    <td class="data" style="padding: 10px;">Gender</td>
+                    <td> <input type="radio" id="male" name="gender" value="Male"
+                            style="background-color: transparent; ">Male
+                        <input type="radio" id="female" name="gender" value="Female"
+                            style="background-color: transparent;">Female
+                    </td>
+                </tr>
+                <tr class="row">
+                    <td id="data" style="padding: 10px;">Course</td>
+                    <td><select style=" color:white; width: 100%; " id="courseList">
+                            <option value="Java">Java</option>
+                            <option value="Python">Python</option>
+                            <option value="C++">C++</option>
+                            <option value="C#">C#</option>
+                            <option value="JS">JS</option>
+                            </select>
+                    </td>
+                </tr>
+                <tr class="row">
+                    <td class="data" style="padding: 10px;">Email</td>
+                    <td><input  type="email" style="background-color: transparent;color: white;" id="email">
+                </tr>
+                <tr class="row" style="background-color: black;cursor: pointer;color: white; text-align: center;">
+                    <td id="save" class="data" colspan="2">Save</td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="container2">
+        <h2 class="heading2" style="text-align: center;">Student Details</h2>
+        <form id="form" style="display: flex; justify-content: center;">
+            <table id="table" border="1">
+                <tr class="row">
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Course</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        var username = document.getElementById("inputName")
+var age = document.getElementById("inputAge")
+var checkRadio = document.getElementsByName('gender')
+var email = document.getElementById("email")
+var save = document.getElementById("save")
+var table = document.getElementById("table")
+var courses = document.getElementById("courseList")
+
+save.addEventListener("click", function() {
+    var row = table.insertRow(-1)
+ var data = row.insertCell(0)
+    var Name = document.createTextNode(username.value)
+    data.appendChild(Name)
+
+    data = row.insertCell(1)
+    var Age = document.createTextNode(age.value)
+    data.appendChild(Age)
+
+    data = row.insertCell(2)
+    var userGender = ''
+    for (i = 0; i < checkRadio.length; i++) {
+        if (checkRadio[i].checked) {
+            userGender = checkRadio[i].value
+        }
+    }
+    var gender = document.createTextNode(userGender)
+    data.appendChild(gender)
+    data = row.insertCell(3)
+    var course = document.createTextNode(courses.value)
+    data.appendChild(course)
+
+    data = row.insertCell(4)
+    var mail = document.createTextNode(email.value)
+    data.appendChild(mail)
+
+    data = row.insertCell(5)
+    var btn = document.createElement("button")
+    btn.textContent = "Delete"
+    btn.classList.add("delete")
+    data.appendChild(btn)
+
+    document.addEventListener("click",function(event){
+        if(event.target.classList.contains("delete")){
+            var d = event.target.parentNode.parentNode
+            d.parentNode.removeChild(d)
+        }
+    })
+
+
+})
+    </script>
+</body>
+
+</html>
